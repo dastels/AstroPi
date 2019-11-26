@@ -17,7 +17,7 @@ Provides debouncing for the buttons.
 ## Examples ##
 
 Both ways of access use events that contains 3 fields:
-1. _timestamp_: the result of time.time() when the event was detected
+1. _timestamp_: the result of `time.time()` when the event was detected
 2. _button_: the relevant button, one of `'a'`, `'b'`, `'top'`, `'bottom'`, `'left'`, or `'right'`
 3. _action_: what happened, one of `pressed` or `released`
 
@@ -56,8 +56,8 @@ Both ways of access use events that contains 3 fields:
             sleep(0.5)
             sense.clear()
 
-1. The AstroPi_Buttons object must be regularly updated.
-2. get_events() returns an array of press/release events (described above) detected on the most recent update.
+1. The `AstroPi_Buttons` object must be regularly updated.
+2. `get_events()` returns an array of press/release events (described above) detected on the most recent update.
 
 ### Callback access ###
 
@@ -118,6 +118,6 @@ Both ways of access use events that contains 3 fields:
     while True:
         pass
 
-1. Callback functions can take 0 or 1 argument, which is an Event object as described above.
-2. Update is done automatically by the callback thread.
-3. The thread is managed automatically as callbacks are added nad removed.
+1. Callback functions can take 0 or 1 argument, which is an event object as described above.
+2. Updating is done automatically by the callback thread.
+3. The thread is managed automatically as callbacks are added and removed.
