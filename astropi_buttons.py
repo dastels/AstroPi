@@ -9,6 +9,15 @@ import inspect
 
 
 AstroPiButtonEvent = namedtuple('AstroPiButtonEvent', ('timestamp', 'button', 'action'))
+
+# If you have the buttons wired differently, tweak these.
+BUTTON_A_PIN = board.D21
+BUTTON_B_PIN = board.D16
+BUTTON_TOP_PIN = board.D26
+BUTTON_BOTTOM_PIN = board.D13
+BUTTON_LEFT_PIN = board.D20
+BUTTON_RIGHT_PIN = board.D19
+
 BUTTON_A = 'a'
 BUTTON_B = 'b'
 BUTTON_TOP = 'top'
@@ -31,12 +40,13 @@ class AstroPi_Buttons(object):
 
 
     def __init__(self):
-        self._button_a = self._make_debouncer(board.D21)
-        self._button_b = self._make_debouncer(board.D16)
-        self._button_top = self._make_debouncer(board.D26)
-        self._button_bottom = self._make_debouncer(board.D13)
-        self._button_left = self._make_debouncer(board.D20)
-        self._button_right = self._make_debouncer(board.D19)
+        """Set up button debouncers and callback support."""
+        self._button_a = self._make_debouncer(BUTTON_A_PIN)
+        self._button_b = self._make_debouncer(BUTTON_B_PIN)
+        self._button_top = self._make_debouncer(BUTTON_TOP_PIN)
+        self._button_bottom = self._make_debouncer(BUTTON_BOTTOM_PIN)
+        self._button_left = self._make_debouncer(BUTTON_LEFT_PIN)
+        self._button_right = self._make_debouncer(BUTTON_RIGHT_PIN)
         self._callbacks = {}
         self._callback_thread = None
         self._callback_event = Event()
