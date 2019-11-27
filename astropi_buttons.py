@@ -1,7 +1,7 @@
 import time
 import board
 import digitalio
-import debouncer
+from adafruit_debouncer import Debouncer
 from functools import wraps
 from collections import namedtuple
 from threading import Thread, Event
@@ -36,7 +36,7 @@ class AstroPi_Buttons(object):
         io = digitalio.DigitalInOut(pin)
         io.direction = digitalio.Direction.INPUT
         io.pull = digitalio.Pull.UP
-        return debouncer.Debouncer(io)
+        return Debouncer(io)
 
 
     def __init__(self):
