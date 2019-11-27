@@ -53,6 +53,8 @@ class AstroPi_Buttons(object):
 
 
     def update(self):
+        """Update all the button debouncers.
+        Just needed to be called explicitly when polling for events."""
         self._button_a.update()
         self._button_b.update()
         self._button_top.update()
@@ -62,6 +64,10 @@ class AstroPi_Buttons(object):
 
 
     def get_events(self, now=time.time()):
+        """Get any press/release events that occurred since the most recent update.
+        Only needed to be called explicitly when polling for events.
+        :param now: the time to stamp each event with
+        """
         events = []
         if self._button_a.fell:
             events.append(AstroPiButtonEvent(timestamp=now, button=BUTTON_A, action=ACTION_PRESSED))
@@ -91,7 +97,7 @@ class AstroPi_Buttons(object):
 
 
     def _wrap_callback(self, fn):
-        # Shamelessley nicked (with some variation) from GPIO Zero :)
+        # Shamelessley nicked (with some variation) from the AstroPi joystick code :)
         @wraps(fn)
         def wrapper(event):
             return fn()
@@ -128,7 +134,6 @@ class AstroPi_Buttons(object):
 
 
     def _start_stop_thread(self):
-        print('start_stop_thread')
         if self._callbacks and not self._callback_thread:
             print('starting callback thread')
             self._callback_event.clear()
@@ -245,29 +250,35 @@ class AstroPi_Buttons(object):
 
     @property
     def a_value(self):
+        """Return the current debounced value of the A button."""
         return self._button_a.value
 
 
     @property
     def b_value(self):
+        """Return the current debounced value of the B button."""
         return self._button_b.value
 
 
     @property
     def top_value(self):
+        """Return the current debounced value of the TOP button."""
         return self._button_top.value
 
 
     @property
     def bottom_value(self):
+        """Return the current debounced value of the BOTTOM button."""
         return self._button_bottom.value
 
 
     @property
     def left_value(self):
+        """Return the current debounced value of the LEFT button."""
         return self._button_left.value
 
 
     @property
     def right_value(self):
+        """Return the current debounced value of the RIGHT button."""
         return self._button_right.value
